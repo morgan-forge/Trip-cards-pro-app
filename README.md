@@ -19,6 +19,8 @@ version: 0.1.0
 
 # Trip Cards Pro (TCP)
 
+**Private repo.** This is the full version; we keep it at least one version ahead of the public app-only repo. See `docs/PUBLIC_REPO.md` for how the two remotes work.
+
 Trip Cards Pro is my **personal trip companion** for me and Christy.
 
 It sits **on top of canonical itinerary data in Obsidian** and turns that into calm, glanceable

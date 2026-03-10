@@ -1,5 +1,7 @@
 # Trip Cards Pro – Folder structure
 
+**Private repo.** This layout is the full version (app + docs); we aim to keep it one version ahead of the public repo, which has app-only files for functionality.
+
 Recommended layout and how it fits Obsidian + the web app.
 
 ---
