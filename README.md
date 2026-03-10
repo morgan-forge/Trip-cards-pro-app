@@ -137,8 +137,5 @@ The README should stay relatively stable, describing *what* TCP is and *how* it 
 
 ## Change log
 
-- **0.1.0 – 2026‑03‑07**
-  - Initial Obsidian‑first README for Trip Cards Pro.
-  - Documented core modes (Planning / On‑trip / Post‑trip).
-  - Linked to canonical itinerary notes and future roadmap documents.
+See **[[docs/CHANGELOG]]** (or `docs/CHANGELOG.md`) for version history. README stays stable; the changelog is the place for “what shipped.”
 
