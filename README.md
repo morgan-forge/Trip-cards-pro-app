@@ -35,8 +35,7 @@ my vault. The implementation lives in the `trip-cards-pro/` folder that this fil
 
 ## High‑level intent
 
-- **Source of truth**: canonical itineraries (e.g. Japan 2026, Málaga, Champagne) live as JSON +
-  markdown in Obsidian under `01 Travel/...`.
+- **Source of truth**: canonical itineraries live as JSON + markdown in Obsidian (e.g. under a folder like `01 Travel/...`), or in local files you load via the app.
 - **TCP’s job** is to *interpret* those itineraries and render:
   - pre‑trip planning views (emotional spine of the trip),
   - on‑trip daily cards with enough detail that I do not need to open Gmail,
@@ -49,20 +48,8 @@ my vault. The implementation lives in the `trip-cards-pro/` folder that this fil
 
 ## Where the truth lives
 
-- **Canonical itineraries (authoritative)**:
-  - Japan 2026: `[[Japan 2026 Canonical JSON]]`
-  - Málaga weekend: `[[Málaga Spain 2026 canonical JSON]]`
-  - Champagne short break: `[[Champagne France May 2026 Canonical JSON]]`
-  - Shared models/spec:
-    - `[[Trip Cards Pro specification]]`
-    - `[[Dining Bands (Japan)]]`
-    - Other travel models under `01 Travel/_models/…`
-
-- **Email → JSON workflow**:
-  - Booking emails land in Gmail.
-  - Gemini converts them into structured JSON.
-  - I paste/save those JSON blocks into Obsidian canonical notes.
-  - TCP treats those booking records as *facts* and never silently edits them.
+- **Canonical itineraries** stay in your Obsidian vault (e.g. under `01 Travel/_plans/`, `01 Travel/_models/`) or in local files. This repo contains only the app code and product docs; no trip data. See `docs/SENSITIVITY_AUDIT.md`.
+- **In the app**: use **Import trip JSON** to load a trip file from your machine. TCP treats booking records as *facts* and never silently edits them.
 
 ---
 
@@ -101,19 +88,15 @@ Principles:
 **Job:** make past experience easy to mine when planning new trips.
 
 - Static but rich look‑back per trip: what actually happened, what we liked, what we’d change.
-- Ability to search by **destination** (e.g. “Cardiff”) and pull up relevant past days across trips.
+- Ability to search by **destination** and pull up relevant past days across trips.
 - Supports reuse: when planning a new trip, bring forward days/ideas that worked well before.
 
 ---
 
 ## Code & data locations (high level)
 
-- This README and the web‑app prototype live in this folder:
-  - `trip-cards-pro/README.md` (this file)
-  - `trip-cards-pro/index.html`, `styles.css`, `app.js`, `manifest.webmanifest` (prototype UI)
-- Canonical itineraries and models live under:
-  - `trip-cards-pro/01 Travel/_plans/...`
-  - `trip-cards-pro/01 Travel/_models/...`
+- This repo contains the **app** only: `README.md`, `index.html`, `styles.css`, `app.js`, `manifest.webmanifest`, `serve.sh`, and `docs/`. No canonical itineraries or trip data are stored here.
+- Canonical itineraries and models live in your Obsidian vault or local storage; you load them into the app via **Import trip JSON**.
 
 The long‑term intent is:
 

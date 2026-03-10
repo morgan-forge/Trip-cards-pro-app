@@ -1,6 +1,27 @@
-# Testing Trip Cards Pro on iPhone
+# Testing Trip Cards Pro
 
-Ways to preview TCP HTML (e.g. Japan 2026 TCP v2, or the root app) on your iPhone.
+Ways to run the app on your Mac (localhost) or on iPhone over the same Wi‑Fi.
+
+---
+
+## Testing on the Mac (localhost)
+
+To run and test the app in a browser on the same Mac that’s serving it:
+
+1. **Start the server** (in Terminal, from the repo root):
+
+   ```bash
+   cd /path/to/trip-cards-pro-new
+   ./serve.sh
+   ```
+
+   Default port is **8765**. Use another with: `TCP_PORT=8888 ./serve.sh`
+
+2. **Open in a browser on the Mac:** **http://localhost:8765/**
+
+3. **Stop the server:** In the Terminal window, press **Ctrl+C**.
+
+The same server is reachable as `localhost` on the Mac and by your Mac’s LAN IP from other devices (e.g. iPhone on the same Wi‑Fi).
 
 ---
 
@@ -31,15 +52,11 @@ On your iPhone (Safari or Hexstatic), open:
   http://192.168.1.42:8765/
 ```
 
-**Note:** Opening the root URL shows the main app (`index.html`), not a folder list. Use the direct Japan v2 link below to open that file.
+**Note:** The root URL serves the main app (`index.html`).
 
 ### 2. Open on iPhone
 
-- In **Safari** or **Hexstatic**, go to that URL (e.g. `http://192.168.1.42:8765/`).
-- To open the Japan v2 card view directly:
-  - `http://<YOUR-IP>:8765/01%20Travel/_plans/Japan/Views%20of%20the%20Japanese%20trip/Japan%202026%20TCP%20v2.html`
-  - Replace `<YOUR-IP>` with the IP shown in Terminal (e.g. `192.168.1.42`).
-- You can bookmark that URL on the iPhone for quick retesting.
+- In **Safari** or **Hexstatic**, go to the URL shown in Terminal (e.g. `http://192.168.1.42:8765/`). You can bookmark it for quick retesting.
 
 ### 3. Stop the server
 
@@ -97,4 +114,4 @@ In the Terminal window where the server is running, press **Ctrl+C**.
 | **B. iCloud + Files** | Quick look when you’ve just synced a file.     |
 | **C. Safari responsive** | Fast layout check on Mac.                    |
 
-For consistent, server-like testing on iPhone, use **Option A** and open the printed URL (or the Japan v2 direct link) in Safari or Hexstatic.
+For consistent, server-like testing on iPhone, use **Option A** and open the printed URL in Safari or Hexstatic.

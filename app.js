@@ -635,7 +635,7 @@ function importTrip(file, onLoaded) {
       saveTrip(parsed);
       onLoaded(parsed);
     } catch (err) {
-      alert("Could not import trip JSON. Please check the file and try again.");
+      alert("Could not import trip JSON. The file must be valid JSON with a top-level \"legs\" array (e.g. [{ \"id\", \"type\", \"startDate\", \"title\", \"location\" }]). Check the file and try again.");
       console.error(err);
     }
   };
@@ -711,6 +711,7 @@ function initTripCardsPro() {
           if (viewAll) renderLegList(viewAll, trip, null);
         });
       });
+      fileInput.value = ""; // allow selecting the same file again
     });
   }
 

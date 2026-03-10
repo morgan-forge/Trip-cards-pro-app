@@ -17,16 +17,9 @@ fi
 
 echo "Trip Cards Pro – local server"
 echo "================================"
-echo "On your iPhone (Safari or Hexstatic), open:"
+echo "On this Mac, open:  http://localhost:${PORT}/"
+echo "On iPhone (same Wi‑Fi), open:  http://${IP}:${PORT}/"
 echo ""
-echo "  http://${IP}:${PORT}/"
-echo ""
-echo "Then navigate to: 01 Travel → _plans → Japan → Views of the Japanese trip"
-JAPAN_V2_URL="http://${IP}:${PORT}/01%20Travel/_plans/Japan/Views%20of%20the%20Japanese%20trip/Japan%202026%20TCP%20v2.html"
-echo "  or open directly (this URL is in your clipboard):"
-echo "  ${JAPAN_V2_URL}"
-echo ""
-printf '%s' "$JAPAN_V2_URL" | pbcopy
 echo "Press Ctrl+C to stop the server."
 echo "================================"
 
