@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Trip Cards Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Personal holiday planner for you and your wife" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="tcp-header">
+        <div class="tcp-header-main">
+          <h1 class="tcp-logo">Trip Cards Pro</h1>
+          <p class="tcp-tagline">Your personal holiday card view</p>
+        </div>
+        <div class="tcp-header-controls">
+          <nav class="tcp-nav">
+            <button class="tcp-nav-btn tcp-nav-btn--active" data-view="today">Today</button>
+            <button class="tcp-nav-btn" data-view="upcoming">Upcoming</button>
+            <button class="tcp-nav-btn" data-view="all">All Legs</button>
+            <button class="tcp-nav-btn" data-view="editor">Trip Editor</button>
+          </nav>
+          <div class="tcp-theme-switcher">
+            <label>
+              Theme:
+              <select id="theme-select">
+                <option value="sunrise">Sunrise</option>
+                <option value="ocean">Ocean</option>
+                <option value="forest">Forest</option>
+                <option value="mono">Mono</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </header>
+
+      <main class="tcp-main">
+        <section id="view-today" class="tcp-view tcp-view--active"></section>
+        <section id="view-upcoming" class="tcp-view"></section>
+        <section id="view-all" class="tcp-view"></section>
+        <section id="view-editor" class="tcp-view"></section>
+      </main>
+
+      <footer class="tcp-footer">
+        <span id="trip-summary"></span>
+        <span class="tcp-footer-right">
+          <button id="btn-import" class="tcp-secondary">Import trip JSON</button>
+          <button id="btn-export" class="tcp-primary">Export trip JSON</button>
+          <input id="file-input" type="file" accept="application/json" hidden />
+        </span>
+      </footer>
+    </div>
+
+    <script type="application/json" id="default-trip-json">
+      {
+        "id": "sample-summer-getaway",
+        "name": "Summer Getaway",
+        "description": "Example itinerary you can edit or replace.",
+        "startDate": "2026-06-10",
+        "endDate": "2026-06-20",
+        "timezone": "local",
+        "legs": [
+          {
+            "id": "travel-out",
+            "type": "travel",
+            "startDate": "2026-06-10",
+            "endDate": "2026-06-10",
+            "title": "Travel to Lisbon",
+            "location": "Home \u2192 Lisbon",
+            "notes": "Evening flight, pack light.",
+            "tags": ["flight", "travel-day"]
+          },
+          {
+            "id": "lisbon-1",
+            "type": "stay",
+            "startDate": "2026-06-11",
+            "endDate": "2026-06-13",
+            "title": "Lisbon city break",
+            "location": "Lisbon, Portugal",
+            "notes": "Try Pastéis de Belém and tram 28.",
+            "tags": ["city", "food"]
+          },
+          {
+            "id": "porto-1",
+            "type": "stay",
+            "startDate": "2026-06-14",
+            "endDate": "2026-06-17",
+            "title": "Porto riverside",
+            "location": "Porto, Portugal",
+            "notes": "Rabelo boat tour, visit wine cellars.",
+            "tags": ["relax", "wine"]
+          },
+          {
+            "id": "travel-home",
+            "type": "travel",
+            "startDate": "2026-06-20",
+            "endDate": "2026-06-20",
+            "title": "Travel home",
+            "location": "Lisbon \u2192 Home",
+            "notes": "Check in online the night before.",
+            "tags": ["flight", "travel-day"]
+          }
+        ]
+      }
+    </script>
+
+    <script src="app.js" type="module"></script>
+  </body>
+  </html>
+

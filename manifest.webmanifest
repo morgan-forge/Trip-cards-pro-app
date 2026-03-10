@@ -1,0 +1,10 @@
+{
+  "name": "Trip Cards Pro",
+  "short_name": "TripCards",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#f97316",
+  "icons": []
+}
+
