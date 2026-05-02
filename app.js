@@ -668,10 +668,13 @@ function initTripCardsPro() {
   registerTheme();
   renderTripSummary(trip);
 
-  const viewToday = document.getElementById("view-today");
-  const viewUpcoming = document.getElementById("view-upcoming");
-  const viewAll = document.getElementById("view-all");
-  const viewEditor = document.getElementById("view-editor");
+const viewToday = document.getElementById("view-today");
+const viewUpcoming = document.getElementById("view-upcoming");
+const viewAll = document.getElementById("view-all");
+const viewEditor = document.getElementById("view-editor");
+const viewTcp = document.getElementById("view-tcp");
+
+
 
   bindNav(trip);
   renderEditor(viewEditor, trip, (updatedTrip) => {
