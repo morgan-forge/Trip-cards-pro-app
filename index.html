@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,6 +8,100 @@
     <meta name="description" content="Personal holiday planner for you and your wife" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
+
+```
+<!-- TCP HTML renderer — scoped styles, no conflict with styles.css -->
+<style>
+  #view-tcp {
+    background: #f5f0e8;
+    min-height: 100%;
+    padding-bottom: 60px;
+  }
+  .tcp-upload-prompt { max-width: 420px; margin: 0 auto; padding: 48px 20px 40px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .tcp-upload-prompt-icon { font-size: 2.5rem; margin-bottom: 16px; line-height: 1; }
+  .tcp-upload-prompt-title { font-size: 1.3rem; font-weight: 700; color: #202124; margin-bottom: 8px; }
+  .tcp-upload-prompt-sub { font-size: 0.9rem; color: #5f6368; line-height: 1.55; margin-bottom: 28px; max-width: 280px; }
+  .tcp-upload-drop { width: 100%; background: #fff; border: 2px dashed #e8eaed; border-radius: 16px; padding: 36px 20px; cursor: pointer; transition: border-color 0.2s; margin-bottom: 14px; }
+  .tcp-upload-drop.over { border-color: #c0392b; background: #fdf2f1; }
+  .tcp-upload-drop-label { font-size: 0.9rem; font-weight: 600; color: #5f6368; }
+  .tcp-saved-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9aa0a6; margin: 24px 0 8px; width: 100%; text-align: left; }
+  .tcp-saved-item { width: 100%; background: #fff; border: 1px solid #e8eaed; border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; margin-bottom: 6px; gap: 10px; }
+  .tcp-saved-item:active { opacity: 0.7; }
+  .tcp-saved-name { font-size: 0.88rem; font-weight: 700; color: #202124; }
+  .tcp-saved-meta { font-size: 0.75rem; color: #9aa0a6; margin-top: 2px; }
+  .tcp-saved-arrow { color: #9aa0a6; font-size: 1rem; }
+  .tcp-clear-btn { background: none; border: none; color: #9aa0a6; font-size: 0.78rem; font-weight: 600; cursor: pointer; padding: 8px 0; margin-top: 4px; }
+
+  .tcp-host { padding-top: 8px; }
+  .tcp-host .day-card { max-width: 420px; margin: 0 auto 16px; padding: 0 10px; opacity: 0; transform: translateY(14px); animation: tcpRise 0.45s cubic-bezier(0.34,1.15,0.64,1) forwards; }
+  .tcp-host .day-card:nth-child(1) { animation-delay: 0s; }
+  .tcp-host .day-card:nth-child(2) { animation-delay: 0.07s; }
+  .tcp-host .day-card:nth-child(3) { animation-delay: 0.14s; }
+  .tcp-host .day-card:nth-child(4) { animation-delay: 0.21s; }
+  .tcp-host .day-card:nth-child(5) { animation-delay: 0.28s; }
+  @keyframes tcpRise { to { opacity:1; transform:translateY(0); } }
+
+  .tcp-host .trip-header { max-width: 420px; margin: 0 auto 24px; padding: 28px 20px 0; }
+  .tcp-host .trip-eyebrow { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #9aa0a6; margin-bottom: 6px; }
+  .tcp-host .trip-title { font-size: 2.1rem; font-weight: 700; line-height: 1.08; letter-spacing: -0.025em; color: #202124; }
+  .tcp-host .trip-title span { color: #c0392b; }
+  .tcp-host .trip-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 13px; }
+  .tcp-host .trip-pill { background: rgba(255,255,255,0.9); border: 1px solid #e8eaed; border-radius: 100px; padding: 4px 12px; font-size: 0.74rem; font-weight: 500; color: #5f6368; }
+  .tcp-host .card-surface { background: #fff; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 8px 24px rgba(0,0,0,0.06); overflow: hidden; }
+  .tcp-host .card-bar { height: 3px; background: var(--role-col); }
+  .tcp-host .card-body { padding: 20px 20px 22px; }
+  .tcp-host .card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .tcp-host .head-left { flex: 1; min-width: 0; }
+  .tcp-host .date-meta { font-size: 0.72rem; font-weight: 700; color: #9aa0a6; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 2px; }
+  .tcp-host .day-title { font-size: 1.4rem; font-weight: 700; line-height: 1.2; letter-spacing: -0.015em; }
+  .tcp-host .role-tag { flex-shrink: 0; background: var(--role-col); color: #fff; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 11px; border-radius: 100px; margin-top: 3px; white-space: nowrap; }
+  .tcp-host .role-tag.closure { background: #3c4043; }
+  .tcp-host .pills { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .tcp-host .pill { background: #f8f9fa; border-radius: 100px; padding: 4px 11px; font-size: 0.74rem; font-weight: 600; color: #5f6368; border: 1px solid #e8eaed; }
+  .tcp-host .pill.rt { background: var(--role-tint); color: var(--role-col); border-color: transparent; }
+  .tcp-host .arrival-box { border: 1.5px dashed var(--role-col); background: var(--role-tint); border-radius: 14px; padding: 13px 15px; margin-bottom: 16px; }
+  .tcp-host .arr-from { font-size: 0.68rem; font-weight: 700; color: var(--role-col); text-transform: uppercase; letter-spacing: 0.07em; opacity: 0.75; margin-bottom: 6px; }
+  .tcp-host .arr-head { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+  .tcp-host .arr-emoji { font-size: 1.05rem; line-height: 1; }
+  .tcp-host .arr-title { font-size: 0.9rem; font-weight: 700; color: var(--role-col); }
+  .tcp-host .arr-body { font-size: 0.87rem; color: #202124; line-height: 1.55; }
+  .tcp-host .sec { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9aa0a6; margin: 16px 0 8px; }
+  .tcp-host .div { height: 1px; background: #e8eaed; margin: 14px 0; }
+  .tcp-host .meal-board { background: #f8f9fa; border-radius: 14px; overflow: hidden; border: 1px solid #e8eaed; }
+  .tcp-host .meal-row { display: flex; align-items: center; padding: 9px 14px; border-bottom: 1px solid #e8eaed; }
+  .tcp-host .meal-row:last-child { border-bottom: none; }
+  .tcp-host .ml { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #9aa0a6; width: 76px; flex-shrink: 0; }
+  .tcp-host .ms { width: 80px; flex-shrink: 0; font-size: 0.77rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+  .tcp-host .ms.paid { color: #188038; }
+  .tcp-host .ms.open { color: #e37400; }
+  .tcp-host .md { font-size: 0.87rem; color: #202124; flex: 1; line-height: 1.4; }
+  .tcp-host .t-item { background: #f8f9fa; border-radius: 14px; padding: 11px 14px; display: flex; align-items: center; gap: 11px; border: 1px solid #e8eaed; margin-bottom: 7px; }
+  .tcp-host .t-item:last-child { margin-bottom: 0; }
+  .tcp-host .t-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1; }
+  .tcp-host .t-body { flex: 1; }
+  .tcp-host .t-route { font-size: 0.87rem; font-weight: 600; color: #202124; line-height: 1.3; }
+  .tcp-host .t-meta { font-size: 0.77rem; color: #5f6368; margin-top: 2px; }
+  .tcp-host .t-badge { flex-shrink: 0; font-size: 0.63rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 9px; border-radius: 100px; }
+  .tcp-host .t-badge.bkd  { background: #e6f4ea; color: #188038; }
+  .tcp-host .t-badge.ubkd { background: #fef7e0; color: #e37400; }
+  .tcp-host .t-badge.upln { background: #f8f9fa; color: #9aa0a6; border: 1px solid #e8eaed; }
+  .tcp-host .act-list { display: flex; flex-direction: column; gap: 9px; }
+  .tcp-host .act-item { background: #f8f9fa; border-radius: 14px; padding: 13px 14px; border: 1px solid #e8eaed; border-left: 3px solid var(--role-col); }
+  .tcp-host .act-item.anchor { background: var(--role-tint); border-color: transparent; border-left: 3px solid var(--role-col); }
+  .tcp-host .act-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 3px; }
+  .tcp-host .act-name { font-size: 0.9rem; font-weight: 700; color: #202124; flex: 1; line-height: 1.3; }
+  .tcp-host .act-time { font-size: 0.82rem; font-weight: 700; color: var(--role-col); flex-shrink: 0; white-space: nowrap; }
+  .tcp-host .act-provider { font-size: 0.84rem; color: #5f6368; margin-bottom: 5px; }
+  .tcp-host .act-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tcp-host .chip { background: rgba(0,0,0,0.055); border-radius: 100px; padding: 2px 9px; font-size: 0.71rem; font-weight: 600; color: #5f6368; }
+  .tcp-host .act-badge { display: inline-flex; align-items: center; background: var(--role-col); color: #fff; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 100px; margin-left: 5px; vertical-align: middle; }
+  .tcp-host .accom { background: var(--role-tint); border-radius: 14px; padding: 13px 15px; display: flex; align-items: flex-start; gap: 10px; }
+  .tcp-host .accom-emoji { font-size: 1.15rem; margin-top: 1px; flex-shrink: 0; }
+  .tcp-host .accom-name { font-size: 0.9rem; font-weight: 700; color: #202124; margin-bottom: 3px; }
+  .tcp-host .accom-detail { font-size: 0.81rem; color: #5f6368; line-height: 1.45; }
+</style>
+```
+
   </head>
   <body>
     <div id="app">
@@ -21,6 +116,7 @@
             <button class="tcp-nav-btn" data-view="upcoming">Upcoming</button>
             <button class="tcp-nav-btn" data-view="all">All Legs</button>
             <button class="tcp-nav-btn" data-view="editor">Trip Editor</button>
+            <button class="tcp-nav-btn" data-view="tcp" id="nav-tcp-btn">Trip Cards</button>
           </nav>
           <div class="tcp-theme-switcher">
             <label>
@@ -36,77 +132,181 @@
         </div>
       </header>
 
-      <main class="tcp-main">
-        <section id="view-today" class="tcp-view tcp-view--active"></section>
-        <section id="view-upcoming" class="tcp-view"></section>
-        <section id="view-all" class="tcp-view"></section>
-        <section id="view-editor" class="tcp-view"></section>
-      </main>
+```
+  <main class="tcp-main">
+    <section id="view-today" class="tcp-view tcp-view--active"></section>
+    <section id="view-upcoming" class="tcp-view"></section>
+    <section id="view-all" class="tcp-view"></section>
+    <section id="view-editor" class="tcp-view"></section>
+    <section id="view-tcp" class="tcp-view">
+      <div id="tcp-upload-prompt" class="tcp-upload-prompt">
+        <div class="tcp-upload-prompt-icon">🗺</div>
+        <div class="tcp-upload-prompt-title">Trip Cards HTML</div>
+        <div class="tcp-upload-prompt-sub">Upload a Trip Cards Pro HTML file to view your itinerary.</div>
+        <div class="tcp-upload-drop" id="tcp-drop-zone" onclick="tcpTriggerPicker()">
+          <div class="tcp-upload-drop-label">📄 Tap to choose file</div>
+        </div>
+      </div>
+      <div id="tcp-saved-section" style="display:none; max-width:420px; margin:0 auto; padding:0 20px;">
+        <div class="tcp-saved-label">Saved on this device</div>
+        <div id="tcp-saved-list"></div>
+        <button class="tcp-clear-btn" onclick="tcpClearAll()">Clear saved trips</button>
+      </div>
+      <div class="tcp-host" id="tcp-host"></div>
+    </section>
+  </main>
 
-      <footer class="tcp-footer">
-        <span id="trip-summary"></span>
-        <span class="tcp-footer-right">
-          <button id="btn-import" class="tcp-secondary">Import trip JSON</button>
-          <button id="btn-export" class="tcp-primary">Export trip JSON</button>
-          <input id="file-input" type="file" accept=".json,application/json,text/plain" hidden />
-        </span>
-      </footer>
-    </div>
+  <footer class="tcp-footer">
+    <span id="trip-summary"></span>
+    <span class="tcp-footer-right">
+      <button id="btn-import" class="tcp-secondary">Import trip JSON</button>
+      <button id="btn-import-html" class="tcp-secondary" onclick="tcpTriggerPicker()">Import Trip Cards</button>
+      <button id="btn-export" class="tcp-primary">Export trip JSON</button>
+      <input id="file-input" type="file" accept=".json,application/json,text/plain" hidden />
+      <input id="tcp-file-input" type="file" accept=".html,text/html" hidden onchange="tcpHandleFile(this.files[0])" />
+    </span>
+  </footer>
+</div>
 
-    <script type="application/json" id="default-trip-json">
-      {
-        "id": "sample-summer-getaway",
-        "name": "Summer Getaway",
-        "description": "Example itinerary you can edit or replace.",
-        "startDate": "2026-06-10",
-        "endDate": "2026-06-20",
-        "timezone": "local",
-        "legs": [
-          {
-            "id": "travel-out",
-            "type": "travel",
-            "startDate": "2026-06-10",
-            "endDate": "2026-06-10",
-            "title": "Travel to Lisbon",
-            "location": "Home \u2192 Lisbon",
-            "notes": "Evening flight, pack light.",
-            "tags": ["flight", "travel-day"]
-          },
-          {
-            "id": "lisbon-1",
-            "type": "stay",
-            "startDate": "2026-06-11",
-            "endDate": "2026-06-13",
-            "title": "Lisbon city break",
-            "location": "Lisbon, Portugal",
-            "notes": "Try Pastéis de Belém and tram 28.",
-            "tags": ["city", "food"]
-          },
-          {
-            "id": "porto-1",
-            "type": "stay",
-            "startDate": "2026-06-14",
-            "endDate": "2026-06-17",
-            "title": "Porto riverside",
-            "location": "Porto, Portugal",
-            "notes": "Rabelo boat tour, visit wine cellars.",
-            "tags": ["relax", "wine"]
-          },
-          {
-            "id": "travel-home",
-            "type": "travel",
-            "startDate": "2026-06-20",
-            "endDate": "2026-06-20",
-            "title": "Travel home",
-            "location": "Lisbon \u2192 Home",
-            "notes": "Check in online the night before.",
-            "tags": ["flight", "travel-day"]
-          }
-        ]
-      }
-    </script>
+<script type="application/json" id="default-trip-json">
+  {
+    "id": "sample-summer-getaway",
+    "name": "Summer Getaway",
+    "description": "Example itinerary you can edit or replace.",
+    "startDate": "2026-06-10",
+    "endDate": "2026-06-20",
+    "timezone": "local",
+    "legs": [
+      { "id": "travel-out", "type": "travel", "startDate": "2026-06-10", "endDate": "2026-06-10", "title": "Travel to Lisbon", "location": "Home \u2192 Lisbon", "notes": "Evening flight, pack light.", "tags": ["flight", "travel-day"] },
+      { "id": "lisbon-1", "type": "stay", "startDate": "2026-06-11", "endDate": "2026-06-13", "title": "Lisbon city break", "location": "Lisbon, Portugal", "notes": "Try Pastéis de Belém and tram 28.", "tags": ["city", "food"] },
+      { "id": "porto-1", "type": "stay", "startDate": "2026-06-14", "endDate": "2026-06-17", "title": "Porto riverside", "location": "Porto, Portugal", "notes": "Rabelo boat tour, visit wine cellars.", "tags": ["relax", "wine"] },
+      { "id": "travel-home", "type": "travel", "startDate": "2026-06-20", "endDate": "2026-06-20", "title": "Travel home", "location": "Lisbon \u2192 Home", "notes": "Check in online the night before.", "tags": ["flight", "travel-day"] }
+    ]
+  }
+</script>
 
-    <script src="app.js" type="module"></script>
+<script src="app.js" type="module"></script>
+
+<!-- TCP HTML renderer — self-contained, zero conflict with app.js -->
+<script>
+  const TCP_KEY = 'tcp_html_trips';
+
+  function tcpTriggerPicker() {
+    document.getElementById('tcp-file-input').click();
+  }
+
+  // Drag and drop
+  window.addEventListener('DOMContentLoaded', function() {
+    var zone = document.getElementById('tcp-drop-zone');
+    if (!zone) return;
+    zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('over'); });
+    zone.addEventListener('dragleave', function() { zone.classList.remove('over'); });
+    zone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      zone.classList.remove('over');
+      var f = e.dataTransfer.files[0];
+      if (f) tcpHandleFile(f);
+    });
+
+    // Init saved list when TCP nav button clicked
+    var navBtn = document.getElementById('nav-tcp-btn');
+    if (navBtn) navBtn.addEventListener('click', tcpRenderSaved);
+  });
+
+  function tcpHandleFile(file) {
+    if (!file || !file.name.endsWith('.html')) {
+      alert('Please choose a Trip Cards Pro HTML file.');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var trip = tcpParse(e.target.result);
+      if (!trip) { alert("This doesn't look like a Trip Cards Pro file."); return; }
+      tcpSave(trip);
+      tcpRender(trip);
+      // Switch to TCP view via nav button
+      var btn = document.getElementById('nav-tcp-btn');
+      if (btn) btn.click();
+    };
+    reader.readAsText(file);
+  }
+
+  function tcpParse(html) {
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var header = doc.querySelector('.trip-header');
+    var cards  = doc.querySelectorAll('.day-card');
+    if (!header || cards.length === 0) return null;
+    // Strip internal artefacts
+    doc.querySelectorAll('.pdf-btn, .pdf-status, script').forEach(function(el) { el.remove(); });
+    doc.querySelectorAll('.chip.warn').forEach(function(el) { el.remove(); });
+    var titleEl = doc.querySelector('.trip-title');
+    var name = titleEl ? titleEl.innerText.replace(/\n/g,' ').trim() : (doc.title || 'Trip');
+    return {
+      id:         'tcp_' + Date.now(),
+      name:       name,
+      savedAt:    new Date().toISOString(),
+      headerHTML: header.outerHTML,
+      cardsHTML:  Array.from(cards).map(function(c){ return c.outerHTML; }).join('\n')
+    };
+  }
+
+  function tcpGetTrips() {
+    try { return JSON.parse(localStorage.getItem(TCP_KEY) || '[]'); } catch(e) { return []; }
+  }
+
+  function tcpSave(trip) {
+    var trips = tcpGetTrips().filter(function(t){ return t.name !== trip.name; });
+    trips.unshift(trip);
+    localStorage.setItem(TCP_KEY, JSON.stringify(trips.slice(0,10)));
+  }
+
+  function tcpClearAll() {
+    if (confirm('Remove all saved Trip Cards from this device?')) {
+      localStorage.removeItem(TCP_KEY);
+      tcpRenderSaved();
+      document.getElementById('tcp-host').innerHTML = '';
+      document.getElementById('tcp-upload-prompt').style.display = '';
+    }
+  }
+
+  function tcpRenderSaved() {
+    var trips   = tcpGetTrips();
+    var section = document.getElementById('tcp-saved-section');
+    var list    = document.getElementById('tcp-saved-list');
+    if (!section || !list) return;
+    if (trips.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    list.innerHTML = trips.map(function(t) {
+      return '<div class="tcp-saved-item" onclick="tcpLoadById(\'' + t.id + '\')">'
+        + '<div><div class="tcp-saved-name">' + tcpEsc(t.name) + '</div>'
+        + '<div class="tcp-saved-meta">Saved ' + tcpFmt(t.savedAt) + '</div></div>'
+        + '<div class="tcp-saved-arrow">›</div></div>';
+    }).join('');
+  }
+
+  function tcpLoadById(id) {
+    var trip = tcpGetTrips().find(function(t){ return t.id === id; });
+    if (trip) tcpRender(trip);
+  }
+
+  function tcpRender(trip) {
+    var host   = document.getElementById('tcp-host');
+    var prompt = document.getElementById('tcp-upload-prompt');
+    if (!host) return;
+    host.innerHTML = trip.headerHTML + '\n' + trip.cardsHTML;
+    if (prompt) prompt.style.display = 'none';
+    tcpRenderSaved();
+    window.scrollTo(0,0);
+  }
+
+  function tcpEsc(s) {
+    return s.replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
+  }
+  function tcpFmt(iso) {
+    try { return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); } catch(e){ return ''; }
+  }
+</script>
+```
+
   </body>
-  </html>
-
+</html>
