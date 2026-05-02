@@ -9,6 +9,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
 
+```
 <!-- TCP HTML renderer — scoped styles, no conflict with styles.css -->
 <style>
   #view-tcp {
@@ -297,15 +298,6 @@
     tcpRenderSaved();
     window.scrollTo(0,0);
   }
-      function tcpSwitchView() {
-        document.querySelectorAll('.tcp-view').forEach(function(v) {
-          v.classList.remove('tcp-view--active');
-        });
-        document.getElementById('view-tcp').classList.add('tcp-view--active');
-        document.querySelectorAll('.tcp-nav-btn').forEach(function(btn) {
-          btn.classList.toggle('tcp-nav-btn--active', btn.dataset.view === 'tcp');
-        });
-      }
 
   function tcpEsc(s) {
     return s.replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; });
@@ -314,7 +306,7 @@
     try { return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); } catch(e){ return ''; }
   }
 </script>
-
+```
 
   </body>
 </html>
