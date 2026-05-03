@@ -240,21 +240,29 @@ padding: 6px 0; width: 100%; text-align: center; margin-top: 6px;
     reader.readAsText(file);
   }
 
-  function parse(html) {
-    var doc = new DOMParser().parseFromString(html, 'text/html');
-    var header = doc.querySelector('.trip-header');
-    var cards  = doc.querySelectorAll('.day-card');
-    if (!header || cards.length === 0) return null;
-    doc.querySelectorAll('.pdf-btn,.pdf-status,script').forEach(function(el){ el.remove(); });
-    doc.querySelectorAll('.chip.warn').forEach(function(el){ el.remove(); });
-    var titleEl = doc.querySelector('.trip-title');
-    var name = titleEl ? titleEl.innerText.replace(/\n/g,' ').trim() : (doc.title || 'Trip');
+    Function parse(html) {
+    // Use regex to extract raw HTML — preserves inline CSS custom properties
+    // which DOMParser strips from style attributes
+    var headerMatch = html.match(/<div class="trip-header"[\s\S]*?(?=<div class="day-card")/);
+    var cardMatches = html.match(/<div class="day-card"[\s\S]*?(?=<div class="day-card"|<\/body>|<script)/g);
+    if (!headerMatch || !cardMatches || cardMatches.length === 0) return null;
+
+    // Strip pdf button and warn chips via regex
+    var cardsHTML = cardMatches.join('\n')
+      .replace(/<button class="pdf-btn"[\s\S]*?<\/button>/g, '')
+      .replace(/<div class="pdf-status"[\s\S]*?<\/div>/g, '')
+      .replace(/<span class="chip warn"[\s\S]*?<\/span>/g, '');
+
+    // Extract trip name from raw HTML
+    var nameMatch = html.match(/class="trip-title"[^>]*>([\s\S]*?)<\/div>/);
+    var name = nameMatch ? nameMatch[1].replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim() : (html.match(/<title>(.*?)<\/title>/)?.[1] || 'Trip');
+
     return {
       id: 'trip_' + Date.now(),
       name: name,
       savedAt: new Date().toISOString(),
-      headerHTML: header.outerHTML,
-      cardsHTML: Array.from(cards).map(function(c){ return c.outerHTML; }).join('\n')
+      headerHTML: headerMatch[0],
+      cardsHTML: cardsHTML
     };
   }
 
